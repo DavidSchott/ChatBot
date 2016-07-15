@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Flask-SocketIO-Chat</title>
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container" style="padding-top: 50px">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Choose a nickname and room to enter chat</h3>
+                </div>
+                <div class="panel-body">
+        <form method="POST">
+            <fieldset>
+                <div class="form-group">
+                    {{ form.hidden_tag() }}
+                    {{ form.name(class="form-control", placeholder="Enter Nickname") }}
+                    {{ form.room(class="form-control", placeholder="Enter Room #") }}
+                </div>
+                {{ form.submit(class="btn btn-lg btn-success btn-block") }}
+                </fieldset>
+        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+
+    </body>
+</html>

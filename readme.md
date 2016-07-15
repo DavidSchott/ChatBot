@@ -1,1 +1,1 @@
-Chatbox Source: http://code.tutsplus.com/tutorials/build-a-real-time-chat-application-with-modulus-and-python--cms-24462
+Chatbox Source:  https://github.com/miguelgrinberg/Flask-SocketIO Copyright (c) 2014 Miguel Grinberg
