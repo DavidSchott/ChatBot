@@ -7,14 +7,14 @@ from chatterbot import ChatBot
 from chatterbot.training.trainers import ChatterBotCorpusTrainer
 from chatterbot.utils import clean
 from nltk.chat import util
-import sys
+import sys, os
 
 nltk_bot_lookup = {"Sun Tsu": sun.suntsu_chat, "Eliza": el.eliza_chat, "*iesha*": ie.iesha_chat, "Chad": rude.rude_chat,
                    "Zen Master": zen.zen_chat}
 
 
 class Bot:
-    def __init__(self, bot_name="eliza"):
+    def __init__(self, bot_name="eliza", corpus_dir="db"):
         if bot_name.lower() == "sun":
             self._bot = util.Chat(sun.pairs, sun.reflections)
             self._greetings = "Welcome, my child. Do you seek enlightenment?"
@@ -36,12 +36,13 @@ class Bot:
             self._greetings = "Hello.  How are you feeling today?"
             self._name = "Eliza"
         else:
+            self._corpus_path = os.path.join(corpus_dir, bot_name + ".db")
             self._bot = ChatBot(bot_name,
                                 storage_adapter="chatterbot.adapters.storage.JsonDatabaseAdapter",
                                 logic_adapters=["chatterbot.adapters.logic.ClosestMatchAdapter"],
                                 input_adapter="chatterbot.adapters.input.VariableInputTypeAdapter",
                                 output_adapter="chatterbot.adapters.output.OutputFormatAdapter",
-                                database="db/" + bot_name + ".db")
+                                database=self._corpus_path)
             self._bot.set_trainer(ChatterBotCorpusTrainer)
             self._name = bot_name
             self._greetings = "You are speaking to " + bot_name + "."
@@ -57,11 +58,14 @@ class Bot:
         return self._greetings
 
     def train(self, corpus="chatterbot.corpus.english"):
-        self._bot.train(corpus)
+        if self._name not in nltk_bot_lookup.keys():
+            self._bot.train(corpus)
 
     def name(self):
         return self._name
 
+    def location(self):
+        return self._corpus_path
 
 def main():
     try:

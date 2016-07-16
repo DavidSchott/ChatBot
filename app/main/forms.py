@@ -6,9 +6,9 @@ class LoginForm(Form):
     """Accepts a nickname and a room."""
     name = StringField('Name', validators=[Required()])
     room = RadioField(u'Select a ChatBot', choices=[
-        ('60', 'Chatty [Statistical, Ongoing]'),
-        ('10', 'Therapist [Pattern]'), ('20', 'Sun Tsu [Pattern]'),
-        ('50', 'Arrogant [Pattern]'), ('30', 'Teen [Pattern]'),
-        ('40', "Philosopher [Pattern]"), ('1', 'None [Public]')
+        ('60', 'Chatty [Statistical, Continous]'),
+        ('10', 'Therapist [Pattern-matching]'), ('20', 'Sun Tsu [Pattern-matching]'),
+        ('50', 'Arrogant [Pattern-matching]'), ('30', 'Teen [Pattern-matching]'),
+        ('40', "Philosopher [Pattern-matching]"), ('1', 'None [Public]')
     ])
     submit = SubmitField('Enter Chatroom')

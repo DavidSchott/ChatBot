@@ -2,6 +2,7 @@ from flask import session
 from flask.ext.socketio import emit, join_room, leave_room
 from .. import socketio
 from bot import Bot
+from os.path import exists
 import uuid
 
 
@@ -26,6 +27,7 @@ def joined(message):
     if with_bot:
         # Keep instance of bot
         b = Bot(bot_rooms[bot_room])
+        b.train()
         active_bots[room] = b
         # Greet user
         emit('status', {'msg': b.name() + ' [BOT] has entered the room.'}, room=room)
