@@ -11,7 +11,7 @@ class Bot:
     def __init__(self, bot_name="eliza"):
         if bot_name.lower() == "sun":
             self._bot = util.Chat(sun.pairs, sun.reflections)
-            self._greetings = "You seek enlightenment?"
+            self._greetings = "Welcome, my child. Do you seek enlightenment?"
             self._name = "Sun Tsu"
         elif bot_name.lower() == "iesha":
             self._bot = util.Chat(ie.pairs, ie.reflections)

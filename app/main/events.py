@@ -2,6 +2,7 @@ from flask import session
 from flask.ext.socketio import emit, join_room, leave_room
 from .. import socketio
 from bot import Bot
+import uuid
 
 bot_rooms = {"10":"eliza","20":"sun", "30":"iesha", "40":"zen", "50":"rude"}  # These are the rooms with bots.
 
@@ -10,9 +11,18 @@ def joined(message):
     """Sent by clients when they enter a room.
     A status message is broadcast to all people in the room."""
     room = session.get('room')
+    with_bot = False
+    if room in bot_rooms.keys():
+        with_bot = True
+        # Store previous ID
+        bot_code = room
+        room = str(uuid.uuid4()) # Create private room
+        session["room"] = room
+        # Keep information associated with bot_code
+        bot_rooms[room] = bot_rooms[bot_code]
     join_room(room)
     emit('status', {'msg': session.get('name') + ' has entered the room.'}, room=room)
-    if int(room) % 10 == 0:
+    if with_bot:
         b = Bot(bot_rooms[room])
         # Greet user
         emit('status', {'msg': b.name() + ' [BOT] has entered the room.'}, room=room)
@@ -25,7 +35,7 @@ def text(message):
     The message is sent to all people in the room."""
     room = session.get('room')
     emit('message', {'msg': session.get('name') + ': ' + message['msg']}, room=room)
-    if int(room) % 10 == 0:
+    if room in bot_rooms.keys():
         b = Bot(bot_rooms[room])
         # Talk to user
         emit('message', {'msg': b.name() + ': ' + b.respond(message['msg'])}, room=room)
