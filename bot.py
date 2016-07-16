@@ -18,7 +18,7 @@ class Bot:
             self._greetings = "hi!! i'm iesha! who r u??!"
             self._name = "*iesha*"
         elif bot_name.lower() == "zen":
-            self._bot = util.Chat(zen.pairs, zen.reflections)
+            self._bot = util.Chat(zen.responses, zen.reflections)
             self._greetings = "Look beyond mere words and letters - look into your mind"
             self._name = "Zen Master"
         elif bot_name.lower() == "rude":

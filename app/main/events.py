@@ -3,6 +3,7 @@ from flask.ext.socketio import emit, join_room, leave_room
 from .. import socketio
 from bot import Bot
 
+bot_rooms = {"10":"eliza","20":"sun", "30":"iesha", "40":"zen", "50":"rude"}  # These are the rooms with bots.
 
 @socketio.on('joined', namespace='/chat')
 def joined(message):
@@ -12,7 +13,7 @@ def joined(message):
     join_room(room)
     emit('status', {'msg': session.get('name') + ' has entered the room.'}, room=room)
     if int(room) % 10 == 0:
-        b = Bot()
+        b = Bot(bot_rooms[room])
         # Greet user
         emit('status', {'msg': b.name() + ' [BOT] has entered the room.'}, room=room)
         emit('message', {'msg':  b.name() + ': ' + b.greet()}, room=room)
@@ -25,7 +26,7 @@ def text(message):
     room = session.get('room')
     emit('message', {'msg': session.get('name') + ': ' + message['msg']}, room=room)
     if int(room) % 10 == 0:
-        b = Bot()
+        b = Bot(bot_rooms[room])
         # Talk to user
         emit('message', {'msg': b.name() + ': ' + b.respond(message['msg'])}, room=room)
 
