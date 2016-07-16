@@ -39,9 +39,9 @@ class Bot:
     def name(self):
         return self._name
 
-""""
+
 def main():
-    nltk_bot_lookup = {"suntsu": sun.suntsu_chat, "eliza": el.eliza_chat, "teen": ie.iesha_chat, "rude": rude.rude_chat,
+    nltk_bot_lookup = {"sun": sun.suntsu_chat, "eliza": el.eliza_chat, "iesha": ie.iesha_chat, "rude": rude.rude_chat,
                        "zen": zen.zen_chat}
     try:
         bot_type = sys.argv.pop()
@@ -55,4 +55,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-"""
