@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # C extensions
 *.so
@@ -89,3 +90,6 @@ chatbot_env/
 
 # Rope project settings
 .ropeproject
+
+# DB
+db/
