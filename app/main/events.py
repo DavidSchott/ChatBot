@@ -4,6 +4,7 @@ from .. import socketio
 from bot import Bot
 import uuid
 
+
 bot_rooms = {"10":"eliza","20":"sun", "30":"iesha", "40":"zen", "50":"rude"}  # These are the rooms with bots.
 
 @socketio.on('joined', namespace='/chat')
@@ -16,7 +17,7 @@ def joined(message):
         with_bot = True
         # Store previous ID
         bot_code = room
-        room = str(uuid.uuid4()) # Create private room
+        room = str(uuid.uuid4())  # Create private room
         session["room"] = room
         # Keep information associated with bot_code
         bot_rooms[room] = bot_rooms[bot_code]
@@ -37,8 +38,11 @@ def text(message):
     emit('message', {'msg': session.get('name') + ': ' + message['msg']}, room=room)
     if room in bot_rooms.keys():
         b = Bot(bot_rooms[room])
-        # Talk to user
-        emit('message', {'msg': b.name() + ': ' + b.respond(message['msg'])}, room=room)
+        # Respond to user
+        response = b.respond(message['msg'])
+        response_delay = (len(response) / 5.0) * 100
+        # Write the input
+        emit('delay', {'msg': b.name() + ': ' + response, 'delay': response_delay}, room=room)
 
 
 @socketio.on('left', namespace='/chat')

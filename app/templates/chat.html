@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Flask-SocketIO-Chat: {{ room }}</title>
+    <title>Chatty - Chatting</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -22,6 +22,9 @@
                     $('#chat').val($('#chat').val() + data.msg + '\n');
                     $('#chat').scrollTop($('#chat')[0].scrollHeight);
                 });
+                socket.on('delay', function(data) {
+                    setTimeout(update_chat_func(data.msg), data.delay);
+                });
                 $('#text').keypress(function(e) {
                     var code = e.keyCode || e.which;
                     if (code == 13) {
@@ -30,6 +33,12 @@
                 });
 
             });
+            function update_chat_func(msg) {
+                return function() {
+                    $('#chat').val($('#chat').val() + msg + '\n');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                }
+            }
             function send_msg() {
                 text = $('#text').val();
                 if (text != '') {
