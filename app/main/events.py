@@ -54,7 +54,8 @@ def left(message):
     """Sent by clients when they leave a room.
     A status message is broadcast to all people in the room."""
     room = session.get('room')
+    if room in active_bots.keys():
+        active_bots[room] = None
     leave_room(room)
-    active_bots[room] = None
     emit('status', {'msg': session.get('name') + ' has left the room.'}, room=room)
 
