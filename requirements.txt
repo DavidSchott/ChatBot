@@ -13,3 +13,4 @@ Werkzeug==0.10.4
 WTForms==1.0.5
 chatterbot==0.4.4
 python-Levenshtein==0.12.0
+gunicorn
