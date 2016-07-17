@@ -3,15 +3,40 @@
     <title>Chatty - Selecting Room</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="app/css/index.css" rel="stylesheet">
+    <style>
+    body {
+        background: url(http://wallpapers55.com/wp-content/uploads/2013/10/circuits-and-a-robot.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+    </style>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+    $('.container-fluid').each(function( index ) {
+     var lastChild = $(this).children().last();
+     var newWidth = lastChild.position().left - $(this).position().left + lastChild.outerWidth(true);
+     $(this).width(newWidth);
+    })
+
+});
     </script>
 </head>
 <body>
-<div class="container" style="padding-top: 50px">
+<div class="container-fluid vertical-center"  style="text-align: center;">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-12">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Choose a nickname and bot to chat with</h3>
