@@ -93,3 +93,4 @@ chatbot_env/
 
 # DB
 db/
+*.db
