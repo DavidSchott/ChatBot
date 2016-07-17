@@ -1,2 +1,1 @@
-web: python chat.py
-heroku ps:scale web=1
+web: gunicorn --worker-class socketio.sgunicorn.GeventSocketIOWorker --log-file=- chat:app
