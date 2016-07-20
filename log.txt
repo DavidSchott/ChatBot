@@ -1,0 +1,101 @@
+2016-07-19T03:42:10.669968+00:00 app[web.1]:     resp.write(item)
+2016-07-19T03:42:10.669969+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/http/wsgi.py", line 292, in write
+2016-07-19T03:42:10.669970+00:00 app[web.1]:     self.send_headers()
+2016-07-19T03:42:10.669971+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/http/wsgi.py", line 288, in send_headers
+2016-07-19T03:42:10.669971+00:00 app[web.1]:     util.write(self.sock, util.to_bytestring(header_str))
+2016-07-19T03:42:10.669972+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/util.py", line 298, in write
+2016-07-19T03:42:10.669973+00:00 app[web.1]:     sock.sendall(data)
+2016-07-19T03:42:10.669974+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/eventlet/greenio/base.py", line 376, in sendall
+2016-07-19T03:42:10.669975+00:00 app[web.1]:     tail = self.send(data, flags)
+2016-07-19T03:42:10.669976+00:00 app[web.1]:     total_sent += fd.send(data[total_sent:], flags)
+2016-07-19T03:42:10.669977+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/socket.py", line 174, in _dummy
+2016-07-19T03:42:10.669976+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/eventlet/greenio/base.py", line 359, in send
+2016-07-19T03:42:10.669978+00:00 app[web.1]:     raise error(EBADF, 'Bad file descriptor')
+2016-07-19T03:42:10.669979+00:00 app[web.1]: error: [Errno 9] Bad file descriptor
+2016-07-19T03:42:19.760494+00:00 heroku[router]: at=info method=GET path="/socket.io/?EIO=3&transport=websocket&sid=085fa0381f77443b9e2cfa490cff6470" host=chatty-bots.herokuapp.com request_id=2129b493-7777-426f-95fe-ffef24916c46 fwd="173.18.235.51" dyno=web.1 connect=1ms service=2955656ms status=101 bytes=2164
+2016-07-19T03:42:57.434655+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/async.py", line 101, in handle_request
+2016-07-19T03:42:57.434643+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/async.py", line 45, in handle
+2016-07-19T03:42:57.434640+00:00 app[web.1]: Traceback (most recent call last):
+2016-07-19T03:42:57.434594+00:00 app[web.1]: 2016-07-19 03:42:57 [9] [ERROR] Socket error processing request.
+2016-07-19T03:42:57.434653+00:00 app[web.1]:     self.handle_request(listener, req, client, addr)
+2016-07-19T03:42:57.434658+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/http/wsgi.py", line 288, in send_headers
+2016-07-19T03:42:57.434656+00:00 app[web.1]:     resp.write(item)
+2016-07-19T03:42:57.434657+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/http/wsgi.py", line 292, in write
+2016-07-19T03:42:57.434657+00:00 app[web.1]:     self.send_headers()
+2016-07-19T03:42:57.434659+00:00 app[web.1]:     util.write(self.sock, util.to_bytestring(header_str))
+2016-07-19T03:42:57.434661+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/eventlet/greenio/base.py", line 376, in sendall
+2016-07-19T03:42:57.434662+00:00 app[web.1]:     tail = self.send(data, flags)
+2016-07-19T03:42:57.434660+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/util.py", line 298, in write
+2016-07-19T03:42:57.434663+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/eventlet/greenio/base.py", line 359, in send
+2016-07-19T03:42:57.434661+00:00 app[web.1]:     sock.sendall(data)
+2016-07-19T03:42:57.434663+00:00 app[web.1]:     total_sent += fd.send(data[total_sent:], flags)
+2016-07-19T03:42:57.434665+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/socket.py", line 174, in _dummy
+2016-07-19T03:42:57.434665+00:00 app[web.1]:     raise error(EBADF, 'Bad file descriptor')
+2016-07-19T03:42:57.434666+00:00 app[web.1]: error: [Errno 9] Bad file descriptor
+2016-07-19T04:18:50.768499+00:00 heroku[web.1]: Idling
+2016-07-19T04:18:50.769196+00:00 heroku[web.1]: State changed from up to down
+2016-07-19T04:18:53.940508+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2016-07-19T04:18:54.723009+00:00 app[web.1]: 2016-07-19 04:18:54 [3] [INFO] Shutting down: Master
+2016-07-19T04:18:54.620789+00:00 app[web.1]: 2016-07-19 04:18:54 [3] [INFO] Handling signal: term
+2016-07-19T04:18:54.622824+00:00 app[web.1]: 2016-07-19 04:18:54 [9] [INFO] Worker exiting (pid: 9)
+2016-07-19T04:18:55.562328+00:00 heroku[web.1]: Process exited with status 0
+2016-07-19T11:45:50.408505+00:00 heroku[web.1]: Unidling
+2016-07-19T11:45:50.408736+00:00 heroku[web.1]: State changed from down to starting
+2016-07-19T11:45:53.915285+00:00 heroku[web.1]: Starting process with command `gunicorn --worker-class eventlet -w 1 chat:app`
+2016-07-19T11:45:55.550122+00:00 app[web.1]: 2016-07-19 11:45:55 [3] [INFO] Listening at: http://0.0.0.0:41053 (3)
+2016-07-19T11:45:55.544770+00:00 app[web.1]: 2016-07-19 11:45:55 [3] [INFO] Starting gunicorn 18.0
+2016-07-19T11:45:55.550261+00:00 app[web.1]: 2016-07-19 11:45:55 [3] [INFO] Using worker: eventlet
+2016-07-19T11:45:55.553751+00:00 app[web.1]: 2016-07-19 11:45:55 [9] [INFO] Booting worker with pid: 9
+2016-07-19T11:45:56.104355+00:00 heroku[web.1]: State changed from starting to up
+2016-07-19T11:45:57.558158+00:00 heroku[router]: at=info method=GET path="/app/css/index.css" host=chatty-bots.herokuapp.com request_id=029dfbf5-fef4-47d1-a4b3-fd4ee374b516 fwd="170.54.118.141" dyno=web.1 connect=1ms service=9ms status=404 bytes=384
+2016-07-19T11:45:57.484914+00:00 heroku[router]: at=info method=GET path="/" host=chatty-bots.herokuapp.com request_id=3a17efa5-f3b8-4f9f-bda0-b380646cf1b8 fwd="170.54.118.141" dyno=web.1 connect=1ms service=15ms status=200 bytes=3345
+2016-07-19T11:45:57.731087+00:00 heroku[router]: at=info method=GET path="/app/css/index.css" host=chatty-bots.herokuapp.com request_id=7d340dda-bf78-48d6-92df-6d6476f3bac7 fwd="170.54.118.141" dyno=web.1 connect=1ms service=4ms status=404 bytes=566
+2016-07-19T11:45:58.010839+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=chatty-bots.herokuapp.com request_id=7ac7e4ce-d216-4ab0-b87e-dc1cba98d5af fwd="170.54.118.141" dyno=web.1 connect=1ms service=4ms status=404 bytes=566
+2016-07-19T11:46:01.940823+00:00 heroku[router]: at=info method=POST path="/" host=chatty-bots.herokuapp.com request_id=c0aacebe-50b7-492b-857e-f74a9a62a6b8 fwd="170.54.118.141" dyno=web.1 connect=1ms service=5ms status=302 bytes=643
+2016-07-19T11:46:03.920230+00:00 heroku[router]: at=info method=GET path="/chat" host=chatty-bots.herokuapp.com request_id=1bd8cc10-7f60-4d8d-b375-16ef476a05ba fwd="170.54.118.141" dyno=web.1 connect=1ms service=7ms status=200 bytes=5034
+2016-07-19T11:46:06.727852+00:00 heroku[router]: at=info method=GET path="/socket.io/?EIO=3&transport=polling&t=LO2-Yor" host=chatty-bots.herokuapp.com request_id=2a4aa0bd-d0ba-4b7a-ad45-b1f469eae5ac fwd="170.54.118.141" dyno=web.1 connect=1ms service=3ms status=200 bytes=417
+2016-07-19T11:46:06.782344+00:00 heroku[router]: at=info method=POST path="/socket.io/?EIO=3&transport=polling&t=LO2-ZI_&sid=ebac08f2953748729b98b8fcc31dde53" host=chatty-bots.herokuapp.com request_id=453bb6f9-f327-4bea-b162-67522a783f26 fwd="170.54.118.141" dyno=web.1 connect=1ms service=4ms status=200 bytes=267
+2016-07-19T11:46:06.818471+00:00 heroku[router]: at=info method=GET path="/socket.io/?EIO=3&transport=polling&t=LO2-ZI_.0&sid=ebac08f2953748729b98b8fcc31dde53" host=chatty-bots.herokuapp.com request_id=203270e6-063a-428b-b7e6-19185a9fd098 fwd="170.54.118.141" dyno=web.1 connect=1ms service=3ms status=200 bytes=258
+2016-07-19T11:46:06.871655+00:00 heroku[router]: at=info method=GET path="/socket.io/?EIO=3&transport=polling&t=LO2-ZKZ.0&sid=ebac08f2953748729b98b8fcc31dde53" host=chatty-bots.herokuapp.com request_id=0dc8f18e-fef6-48dd-ab6b-2348ec287c84 fwd="170.54.118.141" dyno=web.1 connect=2ms service=8ms status=200 bytes=311
+2016-07-19T11:46:06.870049+00:00 heroku[router]: at=info method=POST path="/socket.io/?EIO=3&transport=polling&t=LO2-ZKZ&sid=ebac08f2953748729b98b8fcc31dde53" host=chatty-bots.herokuapp.com request_id=53fd8890-5ead-480d-b22a-875371a802a8 fwd="170.54.118.141" dyno=web.1 connect=1ms service=9ms status=200 bytes=267
+2016-07-19T11:46:08.486580+00:00 heroku[router]: at=info method=GET path="/" host=chatty-bots.herokuapp.com request_id=d37956db-a22f-489d-a7a4-eac0bef72923 fwd="170.54.118.141" dyno=web.1 connect=1ms service=4ms status=200 bytes=3390
+2016-07-19T11:46:08.509914+00:00 heroku[router]: at=info method=GET path="/socket.io/?EIO=3&transport=websocket&sid=ebac08f2953748729b98b8fcc31dde53" host=chatty-bots.herokuapp.com request_id=4219ac5b-f2a3-4674-81ee-843bf56c5858 fwd="170.54.118.141" dyno=web.1 connect=1ms service=1696ms status=101 bytes=129
+2016-07-19T11:46:08.648806+00:00 heroku[router]: at=info method=GET path="/app/css/index.css" host=chatty-bots.herokuapp.com request_id=df3bf255-c8e9-4eba-9af3-8d4a83848cac fwd="170.54.118.141" dyno=web.1 connect=2ms service=4ms status=404 bytes=599
+2016-07-19T11:47:08.436981+00:00 app[web.1]: Traceback (most recent call last):
+2016-07-19T11:47:08.436991+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/eventlet/greenio/base.py", line 359, in send
+2016-07-19T11:47:08.436988+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/util.py", line 298, in write
+2016-07-19T11:47:08.436983+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/async.py", line 45, in handle
+2016-07-19T11:47:08.436965+00:00 app[web.1]: 2016-07-19 11:47:08 [9] [ERROR] Socket error processing request.
+2016-07-19T11:47:08.436984+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/workers/async.py", line 101, in handle_request
+2016-07-19T11:47:08.436983+00:00 app[web.1]:     self.handle_request(listener, req, client, addr)
+2016-07-19T11:47:08.436992+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/socket.py", line 174, in _dummy
+2016-07-19T11:47:08.436985+00:00 app[web.1]:     resp.write(item)
+2016-07-19T11:47:08.436991+00:00 app[web.1]:     total_sent += fd.send(data[total_sent:], flags)
+2016-07-19T11:47:08.436986+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/http/wsgi.py", line 292, in write
+2016-07-19T11:47:08.436993+00:00 app[web.1]:     raise error(EBADF, 'Bad file descriptor')
+2016-07-19T11:47:08.436987+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/gunicorn/http/wsgi.py", line 288, in send_headers
+2016-07-19T11:47:08.436986+00:00 app[web.1]:     self.send_headers()
+2016-07-19T11:47:08.436987+00:00 app[web.1]:     util.write(self.sock, util.to_bytestring(header_str))
+2016-07-19T11:47:08.436989+00:00 app[web.1]:     sock.sendall(data)
+2016-07-19T11:47:08.436990+00:00 app[web.1]:   File "/app/.heroku/python/lib/python2.7/site-packages/eventlet/greenio/base.py", line 376, in sendall
+2016-07-19T11:47:08.436990+00:00 app[web.1]:     tail = self.send(data, flags)
+2016-07-19T11:47:08.436993+00:00 app[web.1]: error: [Errno 9] Bad file descriptor
+2016-07-19T12:18:20.260093+00:00 heroku[web.1]: Idling
+2016-07-19T12:18:20.260540+00:00 heroku[web.1]: State changed from up to down
+2016-07-19T12:18:23.042600+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2016-07-19T12:18:23.809272+00:00 app[web.1]: Exception SystemExit: 0 in <module 'threading' from '/app/.heroku/python/lib/python2.7/threading.pyc'> ignored
+2016-07-19T12:18:23.909830+00:00 app[web.1]: 2016-07-19 12:18:23 [3] [INFO] Shutting down: Master
+2016-07-19T12:18:23.808859+00:00 app[web.1]: 2016-07-19 12:18:23 [9] [INFO] Worker exiting (pid: 9)
+2016-07-19T12:18:23.808989+00:00 app[web.1]: 2016-07-19 12:18:23 [3] [INFO] Handling signal: term
+2016-07-19T12:18:24.887564+00:00 heroku[web.1]: Process exited with status 0
+2016-07-19T17:24:15.127494+00:00 heroku[run.2422]: Awaiting client
+2016-07-19T17:24:15.453894+00:00 heroku[run.2422]: State changed from starting to up
+2016-07-19T17:24:45.128821+00:00 heroku[run.2422]: Error R13 (Attach error) -> Failed to attach to process
+2016-07-19T17:24:45.771646+00:00 heroku[run.2422]: State changed from up to complete
+2016-07-19T17:24:45.759940+00:00 heroku[run.2422]: Process exited with status 128
+2016-07-19T17:24:52.580437+00:00 heroku[run.7736]: Awaiting client
+2016-07-19T17:24:52.879891+00:00 heroku[run.7736]: State changed from starting to up
+2016-07-19T17:24:48.487403+00:00 heroku[api]: Starting process with command `bash` by daschott@iastate.edu
+2016-07-19T17:25:22.581940+00:00 heroku[run.7736]: Error R13 (Attach error) -> Failed to attach to process
+2016-07-19T17:25:23.234247+00:00 heroku[run.7736]: Process exited with status 128
+2016-07-19T17:25:23.246401+00:00 heroku[run.7736]: State changed from up to complete
