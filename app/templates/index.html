@@ -6,7 +6,7 @@
     <link href="app/css/index.css" rel="stylesheet">
     <style>
     body {
-        background: url(http://wallpapers55.com/wp-content/uploads/2013/10/circuits-and-a-robot.jpg) no-repeat center center fixed;
+        background: url({{url_for('main.static', filename='img/home.jpeg')}}) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -24,6 +24,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
+        console.log(window.location.pathname);
     $('.container-fluid').each(function( index ) {
      var lastChild = $(this).children().last();
      var newWidth = lastChild.position().left - $(this).position().left + lastChild.outerWidth(true);
