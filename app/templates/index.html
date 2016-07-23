@@ -6,7 +6,7 @@
     <link href="app/css/index.css" rel="stylesheet">
     <style>
     body {
-        background: url(http://wallpapers55.com/wp-content/uploads/2013/10/circuits-and-a-robot.jpg) no-repeat center center fixed;
+        background: url({{url_for('main.static', filename='img/home.jpg')}}) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -14,49 +14,142 @@
     }
     .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
+  min-height: 100vh; /* These two lines are counted as one       */
 
   display: flex;
+  align-content: stretch;
   align-items: center;
+  margin: auto;
 }
+flex-box {
+    flex: 0 0 auto;
+}
+    .headermessage {
+  margin: 19px;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.image-block {
+    border: 3px solid white ;
+    background-color: black;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    vertical-align: bottom;
+}
+.image-block > p {
+    width: 100%;
+    font-weight: normal;
+    font-size: 19px;
+    padding-top: 150px;
+    background-color: rgba(3,3,3,0.0);
+    color: rgba(6,6,6,0.0);
+}
+.image-block:hover > p {
+    background-color: rgba(3,3,3,0.5);
+    color: white;
+}
+
+.panel-title {
+text-align: center;
+}
+
     </style>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
-        console.log(window.location.pathname);
-    $('.container-fluid').each(function( index ) {
-     var lastChild = $(this).children().last();
-     var newWidth = lastChild.position().left - $(this).position().left + lastChild.outerWidth(true);
-     $(this).width(newWidth);
-    })
+        $('.fixed-width').each(function( index ) {
+         var lastChild = $(this).children().last();
+         var newWidth = lastChild.position().left - $(this).position().left + lastChild.outerWidth(true);
+         $(this).width(newWidth);
+        })
+        // Radio Inputs under tiles
+        $('.radio').click(function(){
+        $(this).find("input:radio").prop("checked", true);
+        room = $(this).find("input:radio").val();
+        console.log(room);
+        $('#room').val(room);
+        })
+        });
 
-});
+
     </script>
 </head>
 <body>
-<div class="container-fluid vertical-center">
+<div class="container-fluid" style="padding-top:300px;">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Choose a nickname and bot to chat with</h3>
+                    <h3 class="panel-title">Choose a nickname and bot to chat</h3>
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST">
                         <fieldset>
                             <div class="form-group">
                                 {{ form.hidden_tag() }}
-                                {{ form.name(class="form-control", placeholder="Enter Nickname") }}
-                                {{ form.room(id="room", class="radio-inline") }}
+                                <span style="white-space:nowrap">
+                                <label for="name">Name:</label>
+                                {{ form.name(class="form-control", placeholder="Enter Nickname", style="max-width:25%;") }}
+                                    </span>
+                                {{ form.room(id="room", style="display: none") }}
                             </div>
-                            {{ form.submit(class="btn btn-lg btn-success btn-block") }}
+                            <div class="row">
+                                <h3 class="headermessage">Pick a Bot</h3>
+                            </div>
+                            <div class="row">
+                                <div class="image-block col-lg-2 radio"
+                                     style="background: url({{url_for('main.static', filename='img/eliza.png')}}) no-repeat center top;background-size:cover;">
+                                    <p> Therapist </p>
+                                    <input type="radio" name="bot" value="10">
+                                </div>
+                                <div class="image-block col-lg-2 radio"
+                                     style="background: url({{url_for('main.static', filename='img/chad.png')}}) no-repeat center top;background-size:cover;">
+                                    <p> Jerk </p>
+                                    <input type="radio" name="bot" value="50">
+                                </div>
+                                <div class="image-block col-lg-2 radio"
+                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
+                                    <p> Chatty </p>
+                                    <input type="radio" name="bot" value="60">
+                                </div>
+                                <div class="image-block col-lg-2 radio"
+                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
+                                    <p> Teen </p>
+                                    <input type="radio" name="bot" value="30">
+                                </div>
+                                <div class="image-block col-lg-2 radio"
+                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
+                                    <p> Philosopher </p>
+                                    <input type="radio" name="bot" value="40">
+                                </div>
+                                <div class="image-block col-lg-2 radio"
+                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
+                                    <p> Sun Tsu </p>
+                                    <input type="radio" name="bot" value="20">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br/>
+                                <br/>
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4">
+                                {{ form.submit(class="btn btn-lg btn-success btn-block") }}
+                                </div>
+                            </div>
                         </fieldset>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>
