@@ -33,12 +33,20 @@ flex-box {
 }
 
 .image-block {
-    border: 3px solid white ;
+    border: 3px solid white;
     background-color: black;
     padding: 0px;
     margin: 0px;
     text-align: center;
     vertical-align: bottom;
+}
+
+.highlight {
+    border: 3px solid #0099ff;
+}
+.highlight > p {
+    background-color: rgba(3,3,3,0.5);
+    color: white;
 }
 .image-block > p {
     width: 100%;
@@ -57,34 +65,37 @@ flex-box {
 text-align: center;
 }
 
+
     </style>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
-        $('.fixed-width').each(function( index ) {
-         var lastChild = $(this).children().last();
-         var newWidth = lastChild.position().left - $(this).position().left + lastChild.outerWidth(true);
-         $(this).width(newWidth);
-        })
-        // Radio Inputs under tiles
-        $('.radio').click(function(){
-        $(this).find("input:radio").prop("checked", true);
-        room = $(this).find("input:radio").val();
-        console.log(room);
-        $('#room').val(room);
-        })
+            $('.fixed-width').each(function( index ) {
+             var lastChild = $(this).children().last();
+             var newWidth = lastChild.position().left - $(this).position().left + lastChild.outerWidth(true);
+             $(this).width(newWidth);
+            })
+            // Carousel Select Event
+            $('.radio').click(function(){
+            // Highlight selection in Carousel
+            $(this).find("input:radio").prop("checked", true);
+            $('.highlight').removeClass("highlight");
+            $(this).addClass("highlight");
+            // Update value of room with corresponding #
+            room = $(this).find("input:radio").val();
+            $('#room').val(room);
+            })
         });
-
 
     </script>
 </head>
 <body>
 <div class="container-fluid" style="padding-top:300px;">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Choose a nickname and bot to chat</h3>
@@ -96,7 +107,7 @@ text-align: center;
                                 {{ form.hidden_tag() }}
                                 <span style="white-space:nowrap">
                                 <label for="name">Name:</label>
-                                {{ form.name(class="form-control", placeholder="Enter Nickname", style="max-width:25%;") }}
+                                {{ form.name(class="form-control", placeholder="Enter Nickname", style="max-width:50%;") }}
                                     </span>
                                 {{ form.room(id="room", style="display: none") }}
                             </div>
@@ -104,43 +115,66 @@ text-align: center;
                                 <h3 class="headermessage">Pick a Bot</h3>
                             </div>
                             <div class="row">
-                                <div class="image-block col-lg-2 radio"
-                                     style="background: url({{url_for('main.static', filename='img/eliza.png')}}) no-repeat center top;background-size:cover;">
-                                    <p> Therapist </p>
-                                    <input type="radio" name="bot" value="10">
-                                </div>
-                                <div class="image-block col-lg-2 radio"
-                                     style="background: url({{url_for('main.static', filename='img/chad.png')}}) no-repeat center top;background-size:cover;">
-                                    <p> Jerk </p>
-                                    <input type="radio" name="bot" value="50">
-                                </div>
-                                <div class="image-block col-lg-2 radio"
-                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
-                                    <p> Chatty </p>
-                                    <input type="radio" name="bot" value="60">
-                                </div>
-                                <div class="image-block col-lg-2 radio"
-                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
-                                    <p> Teen </p>
-                                    <input type="radio" name="bot" value="30">
-                                </div>
-                                <div class="image-block col-lg-2 radio"
-                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
-                                    <p> Philosopher </p>
-                                    <input type="radio" name="bot" value="40">
-                                </div>
-                                <div class="image-block col-lg-2 radio"
-                                     style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
-                                    <p> Sun Tsu </p>
-                                    <input type="radio" name="bot" value="20">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item active">
+                                            <div class="image-block col-lg-4 radio"
+                                                 style="background: url({{url_for('main.static', filename='img/eliza.png')}}) no-repeat center top;background-size:cover;">
+                                                <p> Therapist </p>
+                                                <input type="radio" name="bot" value="10">
+                                            </div>
+                                            <div class="image-block col-lg-4 radio"
+                                                 style="background: url({{url_for('main.static', filename='img/chad.png')}}) no-repeat center top;background-size:cover;">
+                                                <p> Jerk </p>
+                                                <input type="radio" name="bot" value="50">
+                                            </div>
+                                            <div class="image-block col-lg-4 radio"
+                                                 style="background: url({{url_for('main.static', filename='img/gentleman.svg')}}) no-repeat center top;background-size:cover;">
+                                                <p> Chatty </p>
+                                                <input type="radio" name="bot" value="60">
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="image-block col-lg-4 radio"
+                                                 style="background: url({{url_for('main.static', filename='img/gentleman.svg')}}) no-repeat center top;background-size:cover;">
+                                                <p> Teen </p>
+                                                <input type="radio" name="bot" value="30">
+                                            </div>
+                                            <div class="image-block col-lg-4 radio"
+                                                 style="background: url({{url_for('main.static', filename='img/gentleman.svg')}}) no-repeat center top;background-size:cover;">
+                                                <p> Philosopher </p>
+                                                <input type="radio" name="bot" value="40">
+                                            </div>
+                                            <div class="image-block col-lg-4 radio"
+                                                 style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
+                                                <p> Sun Tsu </p>
+                                                <input type="radio" name="bot" value="20">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Left and right controls -->
+                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#myCarousel" role="button"
+                                       data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="row">
                                 <br/>
                                 <br/>
-                                <div class="col-lg-4"></div>
-                                <div class="col-lg-4">
-                                {{ form.submit(class="btn btn-lg btn-success btn-block") }}
+                                <div class="col-lg-3"></div>
+                                <div class="col-lg-6">
+                                    {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
                                 </div>
                             </div>
                         </fieldset>
