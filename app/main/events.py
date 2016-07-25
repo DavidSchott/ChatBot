@@ -6,7 +6,7 @@ from os.path import exists
 import uuid
 
 
-bot_rooms = {"10":"eliza", "20": "sun", "30": "iesha", "40": "zen", "50": "rude", "60": "Chatty"}  # These codes map to bots.
+bot_rooms = {"10":"eliza", "20": "sun", "30": "iesha", "40": "zen", "50": "rude", "60": "Copycat"}  # These codes map to bots.
 active_bots = {}
 
 
