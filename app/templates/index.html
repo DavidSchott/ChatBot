@@ -54,6 +54,9 @@
             background-color: rgba(3,3,3,0.0);
             color: rgba(6,6,6,0.0);
         }
+        .image-block > input {
+            display: none;
+        }
         .image-block:hover > p {
             background-color: rgba(3,3,3,0.5);
             color: white;
@@ -176,13 +179,13 @@
                                         </div>
                                         <div class="item">
                                             <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/gentleman.svg')}}) no-repeat center top;background-size:cover;">
-                                                <p> Teen </p>
+                                                 style="background: url({{url_for('main.static', filename='img/anime.png')}}) no-repeat center top;background-size:cover;">
+                                                <p> Anime Freak </p>
                                                 <input type="radio" name="bot" value="30">
                                             </div>
                                             <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/gentleman.svg')}}) no-repeat center top;background-size:cover;">
-                                                <p> Philosopher </p>
+                                                 style="background: url({{url_for('main.static', filename='img/guru.jpg')}}) no-repeat center top;background-size:cover;">
+                                                <p> Guru </p>
                                                 <input type="radio" name="bot" value="40">
                                             </div>
                                             <div class="image-block col-xs-4 col-md-4 radio"
