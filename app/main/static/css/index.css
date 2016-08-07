@@ -1,0 +1,62 @@
+body {
+    background: url(https://s31.postimg.org/xvelu0kdn/home.jpg) no-repeat center center fixed; /* Keep external for Heroku */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one       */
+    display: flex;
+    align-content: stretch;
+    align-items: center;
+    margin: auto;
+}
+.headermessage {
+    margin: 19px;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.image-block {
+    max-width: 33%;
+    border: 3px solid white;
+    background-color: black;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.highlight {
+    border: 3px solid #0099ff;
+}
+.highlight > p {
+    background-color: rgba(3,3,3,0.5);
+    color: white;
+}
+.image-block > p {
+    width: 100%;
+    font-weight: normal;
+    font-size: 19px;
+    padding-top: 150px;
+    background-color: rgba(3,3,3,0.0);
+    color: rgba(6,6,6,0.0);
+}
+.image-block > input {
+    display: none;
+}
+.image-block:hover > p {
+    background-color: rgba(3,3,3,0.5);
+    color: white;
+}
+.panel-title {
+text-align: center;
+}
+#bot-selected-box {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

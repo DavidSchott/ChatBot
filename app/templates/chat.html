@@ -2,82 +2,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatty Bots - Chatting</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{url_for('main.static', filename='css/chat.css')}}" rel="stylesheet">
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <style>
-        body {
-        background: url(https://s32.postimg.org/64fklkz6d/polygon_2560x1600_orange_red_blue_background_pat.jpg) no-repeat center center fixed;  /* Keep external for Heroku */
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
-    </style>
-    <script type="text/javascript" charset="utf-8">
-            var socket;
-            $(document).ready(function() {
-                hide_error();
-                socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
-                socket.on('connect', function() {
-                    socket.emit('joined', {});
-                });
-                socket.on('status', function(data) {
-                    $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
-                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
-                });
-                socket.on('message', function(data) {
-                    $('#chat').val($('#chat').val() + data.msg + '\n');
-                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
-                });
-                socket.on('delay', function(data) {
-                    setTimeout(update_chat_func(data.msg), data.delay);
-                });
-                $('#text').keypress(function(e) {
-                    var code = e.keyCode || e.which;
-                    if (code == 13) {
-                        send_msg();
-                    }
-                });
-
-            });
-            function update_chat_func(msg) {
-                return function() {
-                    $('#chat').val($('#chat').val() + msg + '\n');
-                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
-                }
-            }
-            function send_msg() {
-                text = $('#text').val();
-                if (text != '') {
-                    if (text.length > 200) {
-                        show_error();
-                    }
-                    else {
-                    hide_error();
-                    $('#text').val('');
-                    socket.emit('text', {msg: text});
-                    }
-                }
-            }
-            function hide_error() {
-            $('#msg-error').hide();
-            }
-            function show_error() {
-                $('#msg-error').show();
-            }
-            function leave_room() {
-                socket.emit('left', {}, function() {
-                    socket.disconnect();
-
-                    // go back to the login page
-                    window.location.href = "{{ url_for('main.index') }}";
-                });
-            }
-
-    </script>
+    <script type="text/javascript" src="{{url_for('main.static', filename='scripts/chat.js')}}"></script>
 </head>
 <body>
 <div class="container">

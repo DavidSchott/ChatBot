@@ -36,7 +36,7 @@ class Bot:
             self._greetings = "Hello.  How are you feeling today?"
             self._name = "Eliza"
         else:
-            self._corpus_path = (bot_name + ".db")
+            self._corpus_path = "CopyCat.db"
             self._bot = ChatBot(bot_name,
                                 storage_adapter="chatterbot.adapters.storage.JsonDatabaseAdapter",
                                 logic_adapters=["chatterbot.adapters.logic.ClosestMatchAdapter"],
@@ -57,7 +57,7 @@ class Bot:
     def greet(self):
         return self._greetings
 
-    def train(self, corpus="chatterbot.corpus.english"):
+    def setup(self, corpus="chatterbot.corpus.english"):
         if self._name not in nltk_bot_lookup.keys():
             self._bot.train(corpus)
 
@@ -67,7 +67,9 @@ class Bot:
     def location(self):
         return self._corpus_path
 
+
 def main():
+    """Speak to an NLTK ChatBot through CLI."""
     try:
         bot_type = sys.argv.pop()
     except IndexError:
