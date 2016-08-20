@@ -28,7 +28,7 @@ function show_bot_description(room, name){
     $('#bot-title').html("You selected: " + name);
     switch(room) {
         case '1':
-            description = "<p>Sick of talking to bots? Talk to like-minded people on this public room.</p><strong>Tags: Public</strong>";
+            description = "<p>Worried about the eminent robot revolution? Connect with like-minded people in this public room.</p><strong>Tags: Public</strong>";
             break;
         case '10':
             description = "<p>Speak to the infamous Eliza Chatbot from the 60's.</p><strong>Tags: NLTK, Pattern-matching</strong>";
@@ -40,13 +40,13 @@ function show_bot_description(room, name){
             description = "<p>Are you an anime fan? Then speak with this anime/manga obsessed bot! </p><strong>Tags: NLTK, Pattern-matching</strong>";
             break;
         case '40':
-            description = "<p>Unlock life's hidden secrets by chatting to an expert on Zen Buddhism.</p><strong>Tags: NLTK, Pattern-matching</strong>";
+            description = "<p>Unlock life's hidden secrets by chatting to this expert on Zen Buddhism.</p><strong>Tags: NLTK, Pattern-matching</strong>";
             break;
         case '50':
             description = "<p>Had a rough day? Why don't you let it all out on this bot. </p><strong>Tags: NLTK, Pattern-matching</strong>";
             break;
         case '60':
-            description = "<p>This slightly more sophisticated bot will learn as you speak with him!</p><strong>Tags: Frequency-based, Evolving</strong>";
+            description = "<p>This frequency-based bot will imitate speeches based on previous conversations.</p><strong>Tags: Frequency-based, Evolving</strong>";
             break;
         default:
             description = "<p>This bot is straight up awesome!</p>";
