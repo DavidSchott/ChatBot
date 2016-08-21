@@ -121,128 +121,6 @@ class DeepQA:
         return parser.parse_args()
 
 
-    def mainTrain(self, sess):
-        """ Training loop
-        Args:
-            sess: The current running session
-        """
-
-        # Specific training dependent loading
-
-        self.textData.makeLighter(self.args.ratioDataset)  # Limit the number of training samples
-
-        mergedSummaries = tf.merge_all_summaries()  # Define the summary operator (Warning: Won't appear on the tensorboard graph)
-        if self.globStep == 0:  # Not restoring from previous run
-            self.writer.add_graph(sess.graph)  # First time only
-
-        # If restoring a model, restore the progression bar ? and current batch ?
-
-        print('Start training...')
-
-        try:  # If the user exit while training, we still try to save the model
-            for e in range(self.args.numEpochs):
-
-                print("--- Epoch {}/{} ; (lr={})".format(e, self.args.numEpochs, self.args.learningRate))
-                print()
-
-                batches = self.textData.getBatches()
-
-                # TODO: Also update learning parameters eventually
-
-                tic = datetime.datetime.now()
-                for nextBatch in tqdm(batches, desc="Training"):
-                    # Training pass
-                    ops, feedDict = self.model.step(nextBatch)
-                    assert len(ops) == 2  # training, loss
-                    _, loss, summary = sess.run(ops + (mergedSummaries,), feedDict)
-                    self.writer.add_summary(summary, self.globStep)
-                    self.globStep += 1
-
-                    # Checkpoint
-                    if self.globStep % self.args.saveEvery == 0:
-                        self._saveSession(sess)
-
-                toc = datetime.datetime.now()
-
-                print("Epoch finished in {}".format(toc-tic))  # Warning: Will overflow if an epoch takes more than 24 hours, and the output isn't really nicer
-        except (KeyboardInterrupt, SystemExit):  # If the user press Ctrl+C while testing progress
-            print('Interruption detected, exiting the program...')
-
-        self._saveSession(sess)  # Ultimate saving before complete exit
-
-    def predictTestset(self, sess):
-        """ Try predicting the sentences from the samples.txt file.
-        The sentences are saved on the modelDir under the same name
-        Args:
-            sess: The current running session
-        """
-
-        # Loading the file to predict
-        with open(os.path.join(self.TEST_IN_NAME), 'r') as f:
-            lines = f.readlines()
-
-        modelList = self._getModelList()
-        if not modelList:
-            print('Warning: No model found in \'{}\'. Please train a model before trying to predict'.format(self.modelDir))
-            return
-
-        # Predicting for each model present in modelDir
-        for modelName in sorted(modelList):  # TODO: Natural sorting
-            print('Restoring previous model from {}'.format(modelName))
-            self.saver.restore(sess, modelName)
-            print('Testing...')
-
-            saveName = modelName[:-len(self.MODEL_EXT)] + self.TEST_OUT_SUFFIX  # We remove the model extension and add the prediction suffix
-            with open(saveName, 'w') as f:
-                nbIgnored = 0
-                for line in tqdm(lines, desc='Sentences'):
-                    question = line[:-1]  # Remove the endl character
-
-                    batch = self.textData.sentence2enco(question)
-                    if not batch:
-                        nbIgnored += 1
-                        continue  # Back to the beginning, try again
-                    ops, feedDict = self.model.step(batch)
-                    output = sess.run(ops[0], feedDict)  # TODO: Summarize the output too (histogram, ...)
-                    answer = self.textData.deco2sentence(output)
-
-                    predString = '{x[0]}{0}\n{x[1]}{1}\n\n'.format(question, self.textData.sequence2str(answer, clean=True), x=self.SENTENCES_PREFIX)
-                    if self.args.verbose:
-                        tqdm.write(predString)
-                    f.write(predString)
-                print('Prediction finished, {}/{} sentences ignored (too long)'.format(nbIgnored, len(lines)))
-
-    def mainTestInteractive(self, sess):
-        """ Try predicting the sentences that the user will enter in the console
-        Args:
-            sess: The current running session
-        """
-        # TODO: If verbose mode, also show similar sentences from the training set with the same words (include in mainTest also)
-        # TODO: Also show the top 10 most likely predictions for each predicted output (when verbose mode)
-
-        print('Testing: Launch interactive mode:')
-        print('')
-        print('Welcome to the interactive mode, here you can ask to Deep Q&A the sentence you want. Don\'t have high '
-              'expectation. Type \'exit\' or just press ENTER to quit the program. Have fun.')
-
-        while True:
-            question = input(self.SENTENCES_PREFIX[0])
-            if question == '' or question == 'exit':
-                break
-
-            batch = self.textData.sentence2enco(question)
-            if not batch:
-                print('Warning: sentence too long, sorry. Maybe try a simpler sentence.')
-                continue  # Back to the beginning, try again
-            print(self.textData.batchSeq2str(batch.encoderSeqs, clean=True, reverse=True))
-            ops, feedDict = self.model.step(batch)
-            output = sess.run(ops[0], feedDict)
-            answer = self.textData.deco2sentence(output)
-
-            print('{}{}'.format(self.SENTENCES_PREFIX[1], self.textData.sequence2str(answer, clean=True)))
-            print(self.textData.sequence2str(answer))
-            print()
-
     def managePreviousModel(self, sess):
         """ Restore or reset the model, depending of the parameters
         If the destination directory already contains some file, it will handle the conflict as following:
@@ -299,16 +177,6 @@ class DeepQA:
             answer = self.textData.deco2sentence(output)
 
             return self.textData.sequence2str(answer, clean=True)
-
-    def _saveSession(self, sess):
-        """ Save the model parameters and the variables
-        Args:
-            sess: the current session
-        """
-        tqdm.write('Checkpoint reached: saving model (don\'t stop the run)...')
-        self.saveModelParams()
-        self.saver.save(sess, self._getModelName())  # TODO: Put a limit size (ex: 3GB for the modelDir)
-        tqdm.write('Model saved.')
 
     def _getModelList(self):
         """ Return the list of the model files inside the model directory
@@ -371,25 +239,6 @@ class DeepQA:
             self.SENTENCES_PREFIX.reverse()
 
 
-    def saveModelParams(self):
-        """ Save the params of the model, like the current globStep value
-        Warning: if you modify this function, make sure the changes mirror loadModelParams
-        """
-        config = configparser.ConfigParser()
-        config['General'] = {}
-        config['General']['version']  = self.CONFIG_VERSION
-        config['General']['globStep']  = str(self.globStep)
-        config['General']['maxLength'] = str(self.args.maxLength)
-        config['General']['watsonMode'] = str(self.args.watsonMode)
-
-        config['Network'] = {}
-        config['Network']['hiddenSize'] = str(self.args.hiddenSize)
-        config['Network']['numLayers'] = str(self.args.numLayers)
-        config['Network']['embeddingSize'] = str(self.args.embeddingSize)
-
-        with open(os.path.join(self.modelDir, self.CONFIG_FILENAME), 'w') as configFile:
-            config.write(configFile)
-
     def _getSummaryName(self):
         """ Parse the argument to decide were to save the summary, at the same place that the model
         The folder could already contain logs if we restore the training, those will be merged
@@ -424,8 +273,3 @@ class DeepQA:
         else:
             print('Warning: Error in the device name: {}, use the default device'.format(self.args.device))
             return None
-
-
-if __name__ == "__main__":
-    program = DeepQA()
-    program.main()

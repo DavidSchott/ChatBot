@@ -7,7 +7,7 @@ from chatterbot import ChatBot
 from chatterbot.training.trainers import ChatterBotCorpusTrainer
 from chatterbot.utils import clean
 from nltk.chat import util
-from my_main import DeepQA
+from deep_qa import DeepQA
 
 
 import sys
