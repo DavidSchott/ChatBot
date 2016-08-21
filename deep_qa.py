@@ -76,7 +76,7 @@ class DeepQA:
         self.writer = tf.train.SummaryWriter(self._getSummaryName())
         self.saver = tf.train.Saver(max_to_keep=200)  # Arbitrary limit ?
 
-    @staticmethod
+
     def parseArgs():
         """
         Parse the arguments from the given command line
