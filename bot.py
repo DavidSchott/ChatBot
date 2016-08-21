@@ -29,12 +29,16 @@ class Bot:
             self._name = "Zen Master"
         elif bot_name.lower() == "rude":
             self._bot = util.Chat(rude.pairs, rude.reflections)
-            self._greetings = "Wow, I look cool today. Hey!"
+            self._greetings = "Wow, I look real fresh today. Hey!"
             self._name = "Chad"
         elif bot_name.lower() == "eliza":
             self._bot = util.Chat(el.pairs, el.reflections)
             self._greetings = "Hello.  How are you feeling today?"
             self._name = "Eliza"
+            # TODO: Integrate with DeepQA bot somehow...
+        elif bot_name.lower() == "laura":
+            self._bot = ""
+            self._greetings = "Hi."
         else:
             self._corpus_path = "CopyCat.db"
             self._bot = ChatBot(bot_name,
