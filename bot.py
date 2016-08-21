@@ -7,6 +7,9 @@ from chatterbot import ChatBot
 from chatterbot.training.trainers import ChatterBotCorpusTrainer
 from chatterbot.utils import clean
 from nltk.chat import util
+from my_main import DeepQA
+
+
 import sys
 
 nltk_bot_lookup = {"Sun Tsu": sun.suntsu_chat, "Eliza": el.eliza_chat, "*iesha*": ie.iesha_chat, "Chad": rude.rude_chat,
@@ -36,9 +39,10 @@ class Bot:
             self._greetings = "Hello.  How are you feeling today?"
             self._name = "Eliza"
             # TODO: Integrate with DeepQA bot somehow...
-        elif bot_name.lower() == "laura":
-            self._bot = ""
-            self._greetings = "Hi."
+        elif bot_name.lower() == "deepqa":
+            self._bot = DeepQA()
+            self._greetings = "Hi. I currently only understand sentences with < 5 words."
+            self._name = "jessica"
         else:
             self._corpus_path = "CopyCat.db"
             self._bot = ChatBot(bot_name,
@@ -62,7 +66,7 @@ class Bot:
         return self._greetings
 
     def setup(self, corpus="chatterbot.corpus.english"):
-        if self._name not in nltk_bot_lookup.keys():
+        if self._name not in nltk_bot_lookup.keys() and self._name != "jessica":
             self._bot.train(corpus)
 
     def name(self):

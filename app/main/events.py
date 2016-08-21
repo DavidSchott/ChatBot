@@ -5,7 +5,7 @@ from bot import Bot
 import uuid
 
 
-bot_rooms = {"10":"eliza", "20": "sun", "30": "iesha", "40": "zen", "50": "rude", "60": "Copycat"}  # These codes map to bots.
+bot_rooms = {"10":"eliza", "20": "sun", "30": "iesha", "40": "zen", "50": "rude", "60": "Copycat", "70": "deepqa"}  # These codes map to bots.
 active_bots = {}
 
 
@@ -24,9 +24,10 @@ def joined(message):
     join_room(room)
     emit('status', {'msg': session.get('name') + ' has entered the room.'}, room=room)
     if with_bot:
-        # Keep instance of bot
+        # Reverse name for CopyCat bot
         if bot_room == "60":
             bot_name = session.get('name')[::-1]
+        # Keep instance of bot
         else:
             bot_name = bot_rooms[bot_room]
         b = Bot(bot_name)
