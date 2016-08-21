@@ -38,11 +38,10 @@ class Bot:
             self._bot = util.Chat(el.pairs, el.reflections)
             self._greetings = "Hello.  How are you feeling today?"
             self._name = "Eliza"
-            # TODO: Integrate with DeepQA bot somehow...
         elif bot_name.lower() == "deepqa":
             self._bot = DeepQA()
             self._greetings = "Hi. I currently only understand sentences with < 5 words."
-            self._name = "jessica"
+            self._name = "Jessica"
         else:
             self._corpus_path = "CopyCat.db"
             self._bot = ChatBot(bot_name,
@@ -66,7 +65,7 @@ class Bot:
         return self._greetings
 
     def setup(self, corpus="chatterbot.corpus.english"):
-        if self._name not in nltk_bot_lookup.keys() and self._name != "jessica":
+        if self._name not in nltk_bot_lookup.keys() and self._name != "Jessica":
             self._bot.train(corpus)
 
     def name(self):

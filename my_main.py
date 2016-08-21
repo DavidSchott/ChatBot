@@ -121,12 +121,6 @@ class DeepQA:
         return parser.parse_args()
 
 
-    def main(self):
-
-        while True:
-            query = input()
-            print(self.get_response(query))
-
     def mainTrain(self, sess):
         """ Training loop
         Args:
@@ -264,8 +258,6 @@ class DeepQA:
             sess: The current running session
         """
 
-        print('WARNING: ', end='')
-
         modelName = self._getModelName()
 
         if os.listdir(self.modelDir):
@@ -300,7 +292,7 @@ class DeepQA:
             self.managePreviousModel(sess)  # Reload the model (eventually)
             batch = self.textData.sentence2enco(question)
             if not batch:
-                return 'Warning: sentence too long, sorry. Maybe try a simpler sentence.'
+                return 'I do not understand, sorry. Maybe try a shorter sentence.'
             self.textData.batchSeq2str(batch.encoderSeqs, clean=True, reverse=True)
             ops, feedDict = self.model.step(batch)
             output = sess.run(ops[0], feedDict)
