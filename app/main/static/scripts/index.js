@@ -1,11 +1,5 @@
 $(document).ready(function() {
     hide_on_init();
-    // TODO: fixed-width not needed?
-    $('.fixed-width').each(function( index ) {
-         var lastChild = $(this).children().last();
-         var newWidth = lastChild.position().left - $(this).position().left + lastChild.outerWidth(true);
-         $(this).width(newWidth);
-    })
     // Carousel Select Event
     $('.radio').click(function() {
         // Highlight selection in Carousel
@@ -28,7 +22,7 @@ function show_bot_description(room, name){
     $('#bot-title').html("You selected: " + name);
     switch(room) {
         case '1':
-            description = "<p>Worried about the eminent robot revolution? Connect with like-minded people in this public room.</p><strong>Tags: Public</strong>";
+            description = "<p>Worried about the eminent robot revolution? Connect with like-minded people in this public room.</p><strong>Tags: Public, Bot-free</strong>";
             break;
         case '10':
             description = "<p>Speak to the infamous Eliza Chatbot from the 60's.</p><strong>Tags: NLTK, Pattern-matching</strong>";
