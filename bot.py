@@ -8,9 +8,10 @@ from chatterbot.training.trainers import ChatterBotCorpusTrainer
 from chatterbot.utils import clean
 from nltk.chat import util
 from deep_qa import DeepQA
-
+from nltk import download
 
 import sys
+
 
 nltk_bot_lookup = {"Sun Tsu": sun.suntsu_chat, "Eliza": el.eliza_chat, "*iesha*": ie.iesha_chat, "Chad": rude.rude_chat,
                    "Zen Master": zen.zen_chat}
@@ -39,6 +40,7 @@ class Bot:
             self._greetings = "Hello.  How are you feeling today?"
             self._name = "Eliza"
         elif bot_name.lower() == "deepqa":
+            download("punkt")  # Tokenizer
             self._bot = DeepQA()
             self._greetings = "Hi. I currently only understand sentences with < 5 words."
             self._name = "Jessica"
