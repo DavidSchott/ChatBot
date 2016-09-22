@@ -7,7 +7,7 @@ from chatterbot import ChatBot
 from chatterbot.training.trainers import ChatterBotCorpusTrainer
 from chatterbot.utils import clean
 from nltk.chat import util
-from deep_qa import DeepQA
+from chatbot import chatbot
 from nltk import download
 
 import sys
@@ -41,7 +41,8 @@ class Bot:
             self._name = "Eliza"
         elif bot_name.lower() == "deepqa":
             download("punkt")  # Tokenizer
-            self._bot = DeepQA()
+            self._bot = chatbot.Chatbot()
+            self._bot.main(['--modelTag', 'try_1', '--test', 'daemon', '--rootDir', '.'])
             self._greetings = "Hi. I currently only understand sentences with < 10 words."
             self._name = "Jessica"
         else:
