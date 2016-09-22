@@ -8,11 +8,11 @@ from chatterbot.training.trainers import ChatterBotCorpusTrainer
 from chatterbot.utils import clean
 from nltk.chat import util
 from chatbot import chatbot
-from nltk import download
 
-import sys
+import sys, download, os
 
-
+MODEL_PATH = "./save/model-try_1/model.ckpt"
+MODEL_URL = "https://www.dropbox.com/s/hyxoj49uw0g4dn8/model.ckpt?dl=0"
 nltk_bot_lookup = {"Sun Tsu": sun.suntsu_chat, "Eliza": el.eliza_chat, "*iesha*": ie.iesha_chat, "Chad": rude.rude_chat,
                    "Zen Master": zen.zen_chat}
 
@@ -40,11 +40,16 @@ class Bot:
             self._greetings = "Hello.  How are you feeling today?"
             self._name = "Eliza"
         elif bot_name.lower() == "deepqa":
-            download("punkt")  # Tokenizer
-            self._bot = chatbot.Chatbot()
-            self._bot.main(['--modelTag', 'try_1', '--test', 'daemon', '--rootDir', '.'])
-            self._greetings = "Hi. I currently only understand sentences with < 10 words."
-            self._name = "Jessica"
+            if not os.path.isfile(MODEL_PATH) or os.path.getsize(download.MODEL_PATH) != 154616514:
+                self._bot = util.Chat(el.pairs, el.reflections)
+                self._greetings = "I am not ready yet. Reload me in 5 minutes."
+                self._name = "Jessica"
+            else:
+                self._bot = chatbot.Chatbot()
+                self._bot.main(['--modelTag', 'try_1', '--test', 'daemon', '--rootDir', '.'])
+                self._greetings = "Hi. I currently only understand sentences with < 10 words."
+                self._name = "Jessica"
+
         else:
             self._corpus_path = "CopyCat.db"
             self._bot = ChatBot(bot_name,
@@ -61,6 +66,8 @@ class Bot:
         query = clean.clean(clean.clean_whitespace(query))
         if self._name in nltk_bot_lookup.keys():
             return self._bot.respond(query)
+        elif not os.path.isfile(MODEL_PATH) or os.path.getsize(download.MODEL_PATH) != 154616514:
+            return str(self._greetings)
         else:
             return str(self._bot.get_response(query))
 
