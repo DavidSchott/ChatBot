@@ -29,3 +29,4 @@ tqdm==4.8.4
 Werkzeug==0.10.4
 WTForms==1.0.5
 https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.10.0rc0-cp35-cp35m-linux_x86_64.whl
+--extra-index-url=https://packagecloud.io/github/git-lfs/pypi/simple

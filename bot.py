@@ -42,7 +42,7 @@ class Bot:
         elif bot_name.lower() == "deepqa":
             download("punkt")  # Tokenizer
             self._bot = DeepQA()
-            self._greetings = "Hi. I currently only understand sentences with < 5 words."
+            self._greetings = "Hi. I currently only understand sentences with < 10 words."
             self._name = "Jessica"
         else:
             self._corpus_path = "CopyCat.db"

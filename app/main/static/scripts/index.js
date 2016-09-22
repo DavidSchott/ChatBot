@@ -43,7 +43,7 @@ function show_bot_description(room, name){
             description = "<p>This frequency-based bot will imitate speeches based on previous conversations.</p><strong>Tags: Frequency-based, Evolving</strong>";
             break;
         case '70':
-            description = "<p>This bot uses the seq2seq model for understanding your sentences. It currently still is a bit shy :(</p><strong>Tags: RNN, Seq2Seq, Alpha</strong>";
+            description = "<p>This bot uses the seq2seq model for understanding your sentences. It currently still is a bit unstable on Heroku :(</p><strong>Tags: RNN, Seq2Seq, Alpha</strong>";
             break;
         default:
             description = "<p>This bot is straight up awesome!</p>";
