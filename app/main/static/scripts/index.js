@@ -28,22 +28,22 @@ function show_bot_description(room, name){
             description = "<p>Speak to the infamous Eliza Chatbot from the 60's.</p><strong>Tags: NLTK, Pattern-matching</strong>";
             break;
         case '20':
-            description = "<p>Speak to Sun Tsu, an ancient, wise chinese military general and philosopher.</p><strong>Tags: NLTK, Pattern-matching</strong>";
+            description = "<p>Speak to Sun Tsu, an ancient, wise chinese military general and philosopher.</p><strong>Tags: NLTK, Pattern-matching, Random</strong>";
             break;
         case '30':
             description = "<p>Are you an anime fan? Then speak with this anime/manga obsessed bot! </p><strong>Tags: NLTK, Pattern-matching</strong>";
             break;
         case '40':
-            description = "<p>Unlock life's hidden secrets by chatting to this expert on Zen Buddhism.</p><strong>Tags: NLTK, Pattern-matching</strong>";
+            description = "<p>Unlock life's hidden secrets by chatting to this expert on Zen Buddhism.</p><strong>Tags: NLTK, Pattern-matching, Random</strong>";
             break;
         case '50':
             description = "<p>Had a rough day? Why don't you let it all out on this bot. </p><strong>Tags: NLTK, Pattern-matching</strong>";
             break;
         case '60':
-            description = "<p>This frequency-based bot will imitate speeches based on previous conversations.</p><strong>Tags: Frequency-based, Evolving</strong>";
+            description = "<p>This frequency-based bot will imitate speeches based on previous conversations. It gets reset when not in use for 30 minutes.</p><strong>Tags: Frequency-based, Evolving</strong>";
             break;
         case '70':
-            description = "<p>This sophisticated bot uses the seq2seq model for understanding your sentences. It does not work on Heroku because Git-LFS is not supported :(</p><strong>Tags: RNN, Seq2Seq, Local-only</strong>";
+            description = "<p>This bot was trained on the <a href='http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html'>Cornell Movie Dialog</a> dataset. It still is a bit unstable on Heroku :(</p><strong>Tags: RNN, Seq2Seq, *NEW*</strong>";
             break;
         default:
             description = "<p>This bot is straight up awesome!</p>";

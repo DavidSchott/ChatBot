@@ -4,11 +4,11 @@
     <title>Chatty Bots - Selecting Room</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="{{url_for('main.static', filename='css/index.css')}}" rel="stylesheet">
+    <link href="{{ url_for('main.static', filename='css/index.css') }}" rel="stylesheet">
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script type="text/javascript" src="{{url_for('main.static', filename='scripts/index.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('main.static', filename='scripts/index.js') }}"></script>
 </head>
 <body>
 <div class="container-fluid" style="padding-top:200px;">
@@ -40,55 +40,42 @@
                                     <ol class="carousel-indicators">
                                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                                         <li data-target="#myCarousel" data-slide-to="1"></li>
-                                        <li data-target="#myCarousel" data-slide-to="2"></li>
                                     </ol>
                                     <div class="carousel-inner" role="listbox">
                                         <div class="item active">
                                             <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/eliza.png')}}) no-repeat center top;background-size:cover;">
+                                                 style="background: url({{ url_for('main.static', filename='img/eliza.png') }}) no-repeat center top;background-size:cover;">
                                                 <p> Therapist </p>
                                                 <input type="radio" name="bot" value="10">
                                             </div>
                                             <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/chad.png')}}) no-repeat center top;background-size:cover;">
-                                                <p> Jerk </p>
-                                                <input type="radio" name="bot" value="50">
+                                                 style="background: url({{ url_for('main.static', filename='img/bot.png') }}) no-repeat center top;background-size:cover;">
+                                                <p> Deep Q&A </p>
+                                                <input type="radio" name="bot" value="70">
                                             </div>
                                             <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/gentleman.svg')}}) no-repeat center top;background-size:cover;">
+                                                 style="background: url({{ url_for('main.static', filename='img/gentleman.svg') }}) no-repeat center top;background-size:cover;">
                                                 <p> Copycat </p>
                                                 <input type="radio" name="bot" value="60">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/anime.png')}}) no-repeat center top;background-size:cover;">
-                                                <p> Anime Freak </p>
-                                                <input type="radio" name="bot" value="30">
-                                            </div>
-                                            <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/guru.jpg')}}) no-repeat center top;background-size:cover;">
+                                                 style="background: url({{ url_for('main.static', filename='img/guru.jpg') }}) no-repeat center top;background-size:cover;">
                                                 <p> Guru </p>
                                                 <input type="radio" name="bot" value="40">
                                             </div>
                                             <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/sun.jpeg')}}) no-repeat center top;background-size:cover;">
+                                                 style="background: url({{ url_for('main.static', filename='img/sun.jpeg') }}) no-repeat center top;background-size:cover;">
                                                 <p> Sun Tsu </p>
                                                 <input type="radio" name="bot" value="20">
                                             </div>
-                                        </div>
-                                            <div class="item">
-                                                 <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/bot.png')}}) no-repeat center top;background-size:cover;">
-                                                <p> Deep Q&A </p>
-                                                <input type="radio" name="bot" value="70">
-                                            </div>
-                                                 <div class="image-block col-xs-4 col-md-4 radio"
-                                                 style="background: url({{url_for('main.static', filename='img/human.jpg')}}) no-repeat center top;background-size:cover;">
+                                                                                        <div class="image-block col-xs-4 col-md-4 radio"
+                                                 style="background: url({{ url_for('main.static', filename='img/human.jpg') }}) no-repeat center top;background-size:cover;">
                                                 <p> People </p>
                                                 <input type="radio" name="bot" value="1">
                                             </div>
-                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Left and right controls -->
                                     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
