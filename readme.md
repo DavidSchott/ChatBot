@@ -3,6 +3,9 @@
 Implementation can be found here:
 http://chatty-bots.herokuapp.com
 
+![Screenshot](https://s30.postimg.org/m1rklxq8h/chatty_bots.png)
+
+
 ### Interesting Links
 Chatbox Source:  https://github.com/miguelgrinberg/Flask-SocketIO Copyright (c) 2014 Miguel Grinberg
 
